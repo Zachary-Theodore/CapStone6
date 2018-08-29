@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<h1>Welcome To Your Personal Task Manager</h1>
+<br/>
+<button type="submit" class="btn btn-info"> <a href="/Home/AddNewTask">Add A New Task Here</a></button>
+<br/>
+<br/>
+<div>Tasks To Be Completed</div>
+<br/>
+<table border="1" class="table">
+    <tr>
+        <th> Task </th>
+        <th> Due Date </th>
+        <th> Completed </th>
+    </tr>
+    @foreach (var item in ViewBag.Tasks)
+    {
+    <tr>
+        <td>
+            @item.task1
+        </td>
+
+        <td>
+            @item.dateDue
+        </td>
+
+        <td>
+            @item.complete
+        </td>
+        
+        <td>
+            <form action="/Home/SwitchComplete">
+                <input type="hidden" name="taskID" value="@item.taskID" />
+                <button class="btn btn-success" type="submit">Task Complete</button>
+            </form>
+        </td>
+
+        <td>
+            <form action="/Home/DeleteTask">
+                <input type="hidden" name="taskID" value="@item.taskID" />
+                <button class="btn btn-danger"type="submit" onclick="return confirm('are you sure you want to remove this task')">Delete Task</button>
+            </form>
+        </td>
+    </tr>
+    }
+</table>
